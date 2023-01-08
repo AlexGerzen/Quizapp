@@ -1,0 +1,68 @@
+/* Generel Classes */
+
+.height100 {
+    height: 100%;
+}
+
+
+.main-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-container {
+    background-color: rgb(40, 40, 85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.left-container img {
+    width: 90px;
+}
+
+.register-container { 
+    font-family: 'Roboto', sans-serif
+}
+
+.start-button {
+    background-color: rgb(236, 115, 1) !important;
+    color: white !important;
+}
+
+.pt-rans {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.card-container {
+    width: 800px;
+    height: 400px !important;
+}
+
+.question-container {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-body {
+    height: 100%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.register {
+    text-align: center;
+}
+
+
+

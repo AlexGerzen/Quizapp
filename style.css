@@ -64,5 +64,15 @@
     text-align: center;
 }
 
+.answer {
+    width: 100%;
+}
 
+.answer-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
+/* Bootstrap */

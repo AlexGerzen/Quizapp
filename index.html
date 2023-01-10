@@ -33,11 +33,33 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <div class="question-container">
-                            <h2 class="card-title pt-rans">Welcome to the Nba Quiz</h2>
-                            <p class="card-text pt-rans">Ready for the Challenge?</p>
+                            <h2 id="question" class="card-title pt-rans">Welcome to the Nba Quiz</h2>
+                            <p id="start-text" class="card-text pt-rans">Ready for the Challenge?</p>
+                            <div class="answer-container">
+                                <div class="card answer" style="display: none;">
+                                    <div id="answer_1" class="card-body">
+                                        Antwort 1
+                                    </div>
+                                </div>
+                                <div class="card answer" style="display: none;">
+                                    <div id="answer_2" class="card-body">
+                                        Antwort 2
+                                    </div>
+                                </div>
+                                <div class="card answer" style="display: none;">
+                                    <div id="answer_3" class="card-body">
+                                        Antwort 3
+                                    </div>
+                                </div>
+                                <div class="card answer" style="display: none;">
+                                    <div id="answer_4" class="card-body">
+                                        Antwort 4
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="button-container">
-                        <button type="button" class="btn start-button">Start now</button>
+                            <button onclick="startQuiz()" type="button" class="btn start-button">Start now</button>
                         </div>
                     </div>
                 </div>

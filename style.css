@@ -152,6 +152,32 @@ h2 {
     margin-bottom: 0;
 }
 
+.end-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.end-container img {
+    width: 100px;
+}
+
+.score-container {
+    display: flex;
+    gap: 20px;
+}
+
+.your-score {
+    font-weight: 700;
+    color: #fd8052;
+}
+
+.score {
+    font-weight: 700;
+}
+
+
 /* Bootstrap */
 
 .card-title {

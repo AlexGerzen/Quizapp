@@ -35,11 +35,13 @@ let questions = [
 
 let currentQuestion = 0;
 let register = 1;
+let amountRightAnswer = 0;
+
 
 function showQuiz() {
     let question = questions[currentQuestion];
     let registerBorderAdd = `register_${register}`;
-    
+    let progress = currentQuestion*25;
 
     document.getElementById('question').innerHTML = `${question["question"]}`; // Frage wird angezeigt
     document.getElementById('answer_1').innerHTML = `<div class="answer-box" id="answer_box_1">A</div> <p class="answer-text">${question["answer_1"]} </p>`; // Antwortmöglichkeit 1 wird angezeigt
@@ -54,6 +56,7 @@ function showQuiz() {
     document.getElementById('answer_4').parentNode.style = ''; // Antwortmöglichkeit 4 wird angezeigt
     document.getElementById('switch-question').style = ''; // Die Buttons zum Frage wechseln werden angezeigt
     document.getElementById(registerBorderAdd).classList.add('left-border');
+    document.getElementById('progressbar').style.width = `${progress}%`;
     
 }
 
@@ -67,6 +70,7 @@ function checkAnswer(choice) {
     if (answer == question["right_answer"]) { // Abfrage ob die angegebene Antwort richtig ist
         document.getElementById(choice).classList.add('bg-limegreen'); // Richtige Antwort wird grün hinterlegt
         document.getElementById(idOfRightAnswerBox).classList.add('answer-right-box'); // Richtige Antwort wird grün hinterlegt
+        amountRightAnswer ++;
     }
     else {
         document.getElementById(choice).classList.add('bg-lightred'); // Falsche Antwort wird rot hinterlegt
@@ -80,8 +84,8 @@ function checkAnswer(choice) {
 function nextQuestion() {
     let registerBorderRemove = `register_${register}`; // Id von der Register
 
-    if (currentQuestion >= questions.length) { // Abfrage ob das Quiz noch fragen hat
-     showEndScreen();  // EndScreen wird angezeigt 
+    if (currentQuestion+1 >= questions.length) { // Abfrage ob das Quiz noch fragen hat
+     showEndScreen(); // EndScreen wird angezeigt 
     }
     else {// Pfad wenn das Quiz noch nicht beendet ist
     removeAnswerClasses(); // Hintergrundfarben werden entfernt
@@ -110,6 +114,27 @@ function previousQuestion() {
         showQuiz(); // Das Quiz wird neu angezeigt
     }
     
+}
+
+function showEndScreen() {
+    document.getElementById('answer-container').style = `display: none`;
+    document.getElementById('question').style = `display: none`;
+    document.getElementById('end-container').style = ``;
+    document.getElementById('register_4').classList.remove('left-border'); // Registerborder wird entfernt
+
+    document.getElementById('score').innerHTML = `${amountRightAnswer}/${questions.length}`; // Anzahl der richtig beantworteten Fragen werden angezeigt
+    document.getElementById('progressbar').style.width = `100%`;
+}
+
+function restart() {
+    currentQuestion = 0; // Variablen werden zurückgesetzt um das Quiz von vorne zu starten
+    register = 1;
+    amountRightAnswer = 0;
+    document.getElementById('answer-container').style = ``;
+    document.getElementById('question').style = ``;
+    document.getElementById('end-container').style = `display: none`;
+    document.getElementById('progressbar').style.width = `0%`;
+    showQuiz();
 }
 
 function removeAnswerClasses() {

@@ -1,7 +1,35 @@
 /* Generel Classes */
-
+h2 {
+    font-size: 24px !important;
+}
 .height100 {
     height: 100%;
+}
+
+.maxheight400 {
+    max-height: 400px;
+}
+
+.bg-limegreen {
+    background-color: rgb(136, 202, 136);
+}
+
+.bg-lightred {
+    background-color: rgb(212, 143, 143);
+}
+
+.left-border {
+    border-left: 5px white solid;
+}
+
+.answer-wrong-box {
+    background-color: red;
+    color: white;
+}
+
+.answer-right-box {
+    background-color: rgb(99, 199, 99);
+    color: white;
 }
 
 
@@ -10,6 +38,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .left-container {
@@ -26,7 +55,15 @@
 }
 
 .register-container { 
-    font-family: 'Roboto', sans-serif
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.register-container span {
+    width: 100%;
 }
 
 .start-button {
@@ -64,8 +101,29 @@
     text-align: center;
 }
 
+.switch-question {
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.switch-question img {
+    background-color: lightblue;
+    border-radius: 100%;
+    padding: 1px;
+}
+
+.switch-question img:hover {
+    cursor: pointer;
+}
+
 .answer {
     width: 100%;
+}
+
+.answer:hover {
+    cursor: pointer;
+    background-color: lightgrey;
 }
 
 .answer-container {
@@ -75,4 +133,27 @@
     gap: 5px;
 }
 
+.answer-box {
+    border: 1px solid;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    padding-top: 2px;
+}
+
+.answer-body {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    align-content: center;
+}
+
+.answer-text {
+    margin-bottom: 0;
+}
+
 /* Bootstrap */
+
+.card-title {
+    padding-top: 40px;
+}

@@ -2,7 +2,7 @@ let questions = [
     {
         "question": "Which player was the model of the NBA logo?",
         "answer_1": "Micheal Jordan",
-        "answer_2": "charles Barkley",
+        "answer_2": "Charles Barkley",
         "answer_3": "Larry Bird",
         "answer_4": "Jerry West",
         "right_answer": 4,
@@ -34,14 +34,100 @@ let questions = [
 ];
 
 let currentQuestion = 0;
+let register = 1;
 
-function startQuiz() {
+function showQuiz() {
     let question = questions[currentQuestion];
+    let registerBorderAdd = `register_${register}`;
+    
 
     document.getElementById('question').innerHTML = `${question["question"]}`; // Frage wird angezeigt
-    document.getElementById('answer_1').innerHTML = `${question["answer_1"]}`; // Antwortmöglichkeit 1 wird angezeigt
-    document.getElementById('answer_2').innerHTML = `${question["answer_2"]}`; // Antwortmöglichkeit 2 wird angezeigt
-    document.getElementById('answer_3').innerHTML = `${question["answer_3"]}`; // Antwortmöglichkeit 3 wird angezeigt
-    document.getElementById('answer_4').innerHTML = `${question["answer_4"]}`; // Antwortmöglichkeit 4 wird angezeigt
+    document.getElementById('answer_1').innerHTML = `<div class="answer-box" id="answer_box_1">A</div> <p class="answer-text">${question["answer_1"]} </p>`; // Antwortmöglichkeit 1 wird angezeigt
+    document.getElementById('answer_2').innerHTML = `<div class="answer-box" id="answer_box_2">B</div> <p class="answer-text">${question["answer_2"]} </p>`; // Antwortmöglichkeit 2 wird angezeigt
+    document.getElementById('answer_3').innerHTML = `<div class="answer-box" id="answer_box_3">C</div> <p class="answer-text">${question["answer_3"]} </p>`; // Antwortmöglichkeit 3 wird angezeigt
+    document.getElementById('answer_4').innerHTML = `<div class="answer-box" id="answer_box_4">D</div> <p class="answer-text">${question["answer_4"]} </p>`; // Antwortmöglichkeit 4 wird angezeigt
     document.getElementById('start-text').style = `display: none`; // Starttext wird ausgeblendet
+    document.getElementById('start-button').style = `display: none`; //Startbutton wird ausgeblendet
+    document.getElementById('answer_1').parentNode.style = ''; // Antwortmöglichkeit 1 wird angezeigt
+    document.getElementById('answer_2').parentNode.style = ''; // Antwortmöglichkeit 2 wird angezeigt
+    document.getElementById('answer_3').parentNode.style = ''; // Antwortmöglichkeit 3 wird angezeigt
+    document.getElementById('answer_4').parentNode.style = ''; // Antwortmöglichkeit 4 wird angezeigt
+    document.getElementById('switch-question').style = ''; // Die Buttons zum Frage wechseln werden angezeigt
+    document.getElementById(registerBorderAdd).classList.add('left-border');
+    
+}
+
+function checkAnswer(choice) {
+    let question = questions[currentQuestion];
+    let answer = choice.toString().slice(-1); // Die ausgewählte Antwort wird der Variable zugeordnet dann in ein String umgewandelt und davon der letzte Character ausgewählt
+    let idOfRightAnswer = `answer_${question["right_answer"]}`; // Die Id der richtigen Antwort wird der Variable zugeordnet
+    let idOfRightAnswerBox = `answer_box_${question["right_answer"]}`;
+    let idOfWrongAnswerBox = `answer_box_${answer}`;
+
+    if (answer == question["right_answer"]) { // Abfrage ob die angegebene Antwort richtig ist
+        document.getElementById(choice).classList.add('bg-limegreen'); // Richtige Antwort wird grün hinterlegt
+        document.getElementById(idOfRightAnswerBox).classList.add('answer-right-box'); // Richtige Antwort wird grün hinterlegt
+    }
+    else {
+        document.getElementById(choice).classList.add('bg-lightred'); // Falsche Antwort wird rot hinterlegt
+        document.getElementById(idOfWrongAnswerBox).classList.add('answer-wrong-box'); // Falsche Antwort wird rot hinterlegt
+        document.getElementById(idOfRightAnswer).classList.add('bg-limegreen'); // Richtige Antwort wird grün hinterlegt
+        document.getElementById(idOfRightAnswerBox).classList.add('answer-right-box'); // Richtige Antwort wird grün hinterlegt
+    }
+    
+}
+
+function nextQuestion() {
+    let registerBorderRemove = `register_${register}`; // Id von der Register
+
+    if (currentQuestion >= questions.length) { // Abfrage ob das Quiz noch fragen hat
+     showEndScreen();  // EndScreen wird angezeigt 
+    }
+    else {// Pfad wenn das Quiz noch nicht beendet ist
+    removeAnswerClasses(); // Hintergrundfarben werden entfernt
+    document.getElementById(registerBorderRemove).classList.remove('left-border'); //Border am Register wird entfernt
+    currentQuestion ++; // Variable wird um 1 erhöht
+    register ++;
+    showQuiz(); // Das Quiz wird neu angezeigt
+    console.log(registerBorderRemove);
+    }
+}
+
+function previousQuestion() {
+    let registerBorderRemove = `register_${register}`; // Id vom Register
+
+    if (currentQuestion <= 0) { // verhindert das die Variable negativ wird
+        currentQuestion = 0;
+    }
+    else {
+        removeAnswerClasses(); // Hintergrundfarben werden entfernt
+
+         
+        console.log(registerBorderRemove);
+        document.getElementById(registerBorderRemove).classList.remove('left-border');
+        register--;
+        currentQuestion --; // Variable wird um 1 verringert
+        showQuiz(); // Das Quiz wird neu angezeigt
+    }
+    
+}
+
+function removeAnswerClasses() {
+    document.getElementById('answer_1').classList.remove('bg-lightred');
+    document.getElementById('answer_1').classList.remove('bg-limegreen');
+    document.getElementById('answer_2').classList.remove('bg-lightred');
+    document.getElementById('answer_2').classList.remove('bg-limegreen');
+    document.getElementById('answer_3').classList.remove('bg-lightred');
+    document.getElementById('answer_3').classList.remove('bg-limegreen');
+    document.getElementById('answer_4').classList.remove('bg-lightred');
+    document.getElementById('answer_4').classList.remove('bg-limegreen');
+
+    document.getElementById('answer_box_1').classList.remove('answer-right-box');
+    document.getElementById('answer_box_1').classList.remove('answer-wrong-box');
+    document.getElementById('answer_box_2').classList.remove('answer-right-box');
+    document.getElementById('answer_box_2').classList.remove('answer-wrong-box');
+    document.getElementById('answer_box_3').classList.remove('answer-right-box');
+    document.getElementById('answer_box_3').classList.remove('answer-wrong-box');
+    document.getElementById('answer_box_4').classList.remove('answer-right-box');
+    document.getElementById('answer_box_4').classList.remove('answer-wrong-box');
 }

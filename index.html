@@ -21,49 +21,53 @@
     <div class="main-container">
         <div class="card mb-3 card-container">
             <div class="row g-0 height100">
-                <div class="col-md-4 left-container">
+                <div class="col-md-4 left-container maxheight400">
                     <img src="img/logo.png" alt="">
                     <div class="text-white register-container">
-                        <p class="register">History</p>
-                        <p class="register">Player</p>
-                        <p class="register">Team</p>
-                        <p class="register">Champions</p>
+                        <span id="register_1" class="register">History</span>
+                        <span id="register_2" class="register">Player</span>
+                        <span id="register_3" class="register">Team</span>
+                        <span id="register_4" class="register">Champions</span>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 maxheight400">
                     <div class="card-body">
                         <div class="question-container">
                             <h2 id="question" class="card-title pt-rans">Welcome to the Nba Quiz</h2>
                             <p id="start-text" class="card-text pt-rans">Ready for the Challenge?</p>
                             <div class="answer-container">
                                 <div class="card answer" style="display: none;">
-                                    <div id="answer_1" class="card-body">
+                                    <div onclick="checkAnswer('answer_1')" id="answer_1" class="card-body answer-body">
                                         Antwort 1
                                     </div>
                                 </div>
                                 <div class="card answer" style="display: none;">
-                                    <div id="answer_2" class="card-body">
+                                    <div onclick="checkAnswer('answer_2')" id="answer_2" class="card-body answer-body">
                                         Antwort 2
                                     </div>
                                 </div>
                                 <div class="card answer" style="display: none;">
-                                    <div id="answer_3" class="card-body">
+                                    <div onclick="checkAnswer('answer_3')" id="answer_3" class="card-body answer-body">
                                         Antwort 3
                                     </div>
                                 </div>
                                 <div class="card answer" style="display: none;">
-                                    <div id="answer_4" class="card-body">
+                                    <div onclick="checkAnswer('answer_4')" id="answer_4" class="card-body answer-body">
                                         Antwort 4
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="button-container">
-                            <button onclick="startQuiz()" type="button" class="btn start-button">Start now</button>
+                            <button id="start-button" onclick="showQuiz()" type="button" class="btn start-button">Start now</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="switch-question" id="switch-question" style="display: none;">
+            <img onclick="previousQuestion()" src="img/arrow-left.png" alt="">
+            <img onclick="nextQuestion()" src="img/arrow-right.png" alt="">
         </div>
     </div>
 </body>

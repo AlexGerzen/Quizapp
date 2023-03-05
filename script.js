@@ -70,7 +70,11 @@ function checkAnswer(choice) {
     if (answer == question["right_answer"]) { // Abfrage ob die angegebene Antwort richtig ist
         document.getElementById(choice).classList.add('bg-limegreen'); // Richtige Antwort wird grün hinterlegt
         document.getElementById(idOfRightAnswerBox).classList.add('answer-right-box'); // Richtige Antwort wird grün hinterlegt
-        amountRightAnswer ++;
+        if (amountRightAnswer < questions.length) { // Damit nichtt mehr Fragen richtig sind als überhaupt vorhanden sind
+            amountRightAnswer ++; 
+        }
+        
+
     }
     else {
         document.getElementById(choice).classList.add('bg-lightred'); // Falsche Antwort wird rot hinterlegt
@@ -121,6 +125,7 @@ function showEndScreen() {
     document.getElementById('question').style = `display: none`;
     document.getElementById('end-container').style = ``;
     document.getElementById('register_4').classList.remove('left-border'); // Registerborder wird entfernt
+    document.getElementById('switch-question').style = `display: none`; // Pfeile zum Fragen wechseln werden entfernt
 
     document.getElementById('score').innerHTML = `${amountRightAnswer}/${questions.length}`; // Anzahl der richtig beantworteten Fragen werden angezeigt
     document.getElementById('progressbar').style.width = `100%`;

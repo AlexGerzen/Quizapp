@@ -55,7 +55,7 @@ h2 {
 }
 
 .register-container { 
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Rubik', sans-serif;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -67,12 +67,9 @@ h2 {
 }
 
 .start-button {
+    font-family: 'PT Sans', sans-serif !important;
     background-color: rgb(236, 115, 1) !important;
     color: white !important;
-}
-
-.pt-rans {
-    font-family: 'Roboto', sans-serif !important;
 }
 
 .card-container {
@@ -81,6 +78,7 @@ h2 {
 }
 
 .question-container {
+    font-family: 'PT Sans', sans-serif !important;
     height: 80%;
     display: flex;
     justify-content: center;
@@ -127,6 +125,7 @@ h2 {
 }
 
 .answer-container {
+    font-family: 'Rubik', sans-serif;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -182,4 +181,23 @@ h2 {
 
 .card-title {
     padding-top: 40px;
+}
+
+@media(max-width: 767px) {
+    .card-container {
+        width: 100%;
+        height: fit-content !important;
+    }
+    
+    .main-container {
+        justify-content: space-around;
+    }
+
+    .question-container {
+        height: auto;
+    }
+
+    .left-container img {
+        padding-bottom: 20px;
+    }
 }

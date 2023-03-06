@@ -44,20 +44,23 @@ function showQuiz() {
     let progress = currentQuestion*25;
 
     document.getElementById('question').innerHTML = `${question["question"]}`; // Frage wird angezeigt
+    document.getElementById('start-text').style = `display: none`; // Starttext wird ausgeblendet
+    document.getElementById('start-button').style = `display: none`; //Startbutton wird ausgeblendet 
+    document.getElementById('switch-question').style = ''; // Die Buttons zum Frage wechseln werden angezeigt
+    document.getElementById(registerBorderAdd).classList.add('left-border');
+    document.getElementById('progressbar').style.width = `${progress}%`;
+    showAnswer(question);
+}
+
+function showAnswer(question) {
     document.getElementById('answer_1').innerHTML = `<div class="answer-box" id="answer_box_1">A</div> <p class="answer-text">${question["answer_1"]} </p>`; // Antwortmöglichkeit 1 wird angezeigt
     document.getElementById('answer_2').innerHTML = `<div class="answer-box" id="answer_box_2">B</div> <p class="answer-text">${question["answer_2"]} </p>`; // Antwortmöglichkeit 2 wird angezeigt
     document.getElementById('answer_3').innerHTML = `<div class="answer-box" id="answer_box_3">C</div> <p class="answer-text">${question["answer_3"]} </p>`; // Antwortmöglichkeit 3 wird angezeigt
     document.getElementById('answer_4').innerHTML = `<div class="answer-box" id="answer_box_4">D</div> <p class="answer-text">${question["answer_4"]} </p>`; // Antwortmöglichkeit 4 wird angezeigt
-    document.getElementById('start-text').style = `display: none`; // Starttext wird ausgeblendet
-    document.getElementById('start-button').style = `display: none`; //Startbutton wird ausgeblendet
     document.getElementById('answer_1').parentNode.style = ''; // Antwortmöglichkeit 1 wird angezeigt
     document.getElementById('answer_2').parentNode.style = ''; // Antwortmöglichkeit 2 wird angezeigt
     document.getElementById('answer_3').parentNode.style = ''; // Antwortmöglichkeit 3 wird angezeigt
     document.getElementById('answer_4').parentNode.style = ''; // Antwortmöglichkeit 4 wird angezeigt
-    document.getElementById('switch-question').style = ''; // Die Buttons zum Frage wechseln werden angezeigt
-    document.getElementById(registerBorderAdd).classList.add('left-border');
-    document.getElementById('progressbar').style.width = `${progress}%`;
-    
 }
 
 function checkAnswer(choice) {
@@ -73,76 +76,66 @@ function checkAnswer(choice) {
         if (amountRightAnswer < questions.length) { // Damit nichtt mehr Fragen richtig sind als überhaupt vorhanden sind
             amountRightAnswer ++; 
         }
-        
-
     }
-    else {
+    else { // Ausgabe wenn die angegebene Antwort falsch ist
         document.getElementById(choice).classList.add('bg-lightred'); // Falsche Antwort wird rot hinterlegt
         document.getElementById(idOfWrongAnswerBox).classList.add('answer-wrong-box'); // Falsche Antwort wird rot hinterlegt
         document.getElementById(idOfRightAnswer).classList.add('bg-limegreen'); // Richtige Antwort wird grün hinterlegt
         document.getElementById(idOfRightAnswerBox).classList.add('answer-right-box'); // Richtige Antwort wird grün hinterlegt
     }
-    
+}
+
+function revealAnswer() {
+
 }
 
 function nextQuestion() {
-    let registerBorderRemove = `register_${register}`; // Id von der Register
-
     if (currentQuestion+1 >= questions.length) { // Abfrage ob das Quiz noch fragen hat
      showEndScreen(); // EndScreen wird angezeigt 
     }
-    else {// Pfad wenn das Quiz noch nicht beendet ist
+    else { // Pfad wenn das Quiz noch nicht beendet ist
     removeAnswerClasses(); // Hintergrundfarben werden entfernt
-    document.getElementById(registerBorderRemove).classList.remove('left-border'); //Border am Register wird entfernt
+    removeRegisterBorder();
     currentQuestion ++; // Variable wird um 1 erhöht
     register ++;
     showQuiz(); // Das Quiz wird neu angezeigt
-    console.log(registerBorderRemove);
     }
 }
 
 function previousQuestion() {
-    let registerBorderRemove = `register_${register}`; // Id vom Register
-
     if (currentQuestion <= 0) { // verhindert das die Variable negativ wird
         currentQuestion = 0;
     }
     else {
         removeAnswerClasses(); // Hintergrundfarben werden entfernt
-
-         
-        console.log(registerBorderRemove);
-        document.getElementById(registerBorderRemove).classList.remove('left-border');
+        removeRegisterBorder();
         register--;
         currentQuestion --; // Variable wird um 1 verringert
         showQuiz(); // Das Quiz wird neu angezeigt
-    }
-    
+    } 
 }
 
 function showEndScreen() {
-    document.getElementById('answer-container').style = `display: none`;
-    document.getElementById('question').style = `display: none`;
-    document.getElementById('end-container').style = ``;
+    document.getElementById('answer-container').style = `display: none`;  // Antworten werden ausgeblendet
+    document.getElementById('question').style = `display: none`; //Frage wird ausgeblendet
+    document.getElementById('end-container').style = ``; // Endcontainer wird angezeigt
     document.getElementById('register_4').classList.remove('left-border'); // Registerborder wird entfernt
     document.getElementById('switch-question').style = `display: none`; // Pfeile zum Fragen wechseln werden entfernt
-
     document.getElementById('score').innerHTML = `${amountRightAnswer}/${questions.length}`; // Anzahl der richtig beantworteten Fragen werden angezeigt
-    document.getElementById('progressbar').style.width = `100%`;
+    document.getElementById('progressbar').style.width = `100%`; // Progressbar wird komplett aufgefüllt
 }
 
 function restart() {
-    currentQuestion = 0; // Variablen werden zurückgesetzt um das Quiz von vorne zu starten
-    register = 1;
-    amountRightAnswer = 0;
-    document.getElementById('answer-container').style = ``;
-    document.getElementById('question').style = ``;
-    document.getElementById('end-container').style = `display: none`;
-    document.getElementById('progressbar').style.width = `0%`;
+    resetCounter();
+    document.getElementById('answer-container').style = ``; // Antwortencontainer anzeigen
+    document.getElementById('question').style = ``; // Fragencontainer anzeigen
+    document.getElementById('end-container').style = `display: none`; // Endcontainer ausblenden
+    document.getElementById('progressbar').style.width = `0%`; // Reset Progressbar
+    removeAnswerClasses();
     showQuiz();
 }
 
-function removeAnswerClasses() {
+function removeAnswerClasses() {   // Richtig oder Falsch Anzeige wird entfernt
     document.getElementById('answer_1').classList.remove('bg-lightred');
     document.getElementById('answer_1').classList.remove('bg-limegreen');
     document.getElementById('answer_2').classList.remove('bg-lightred');
@@ -160,4 +153,16 @@ function removeAnswerClasses() {
     document.getElementById('answer_box_3').classList.remove('answer-wrong-box');
     document.getElementById('answer_box_4').classList.remove('answer-right-box');
     document.getElementById('answer_box_4').classList.remove('answer-wrong-box');
+}
+
+function resetCounter() {
+    currentQuestion = 0; // Variablen werden zurückgesetzt um das Quiz von vorne zu starten
+    register = 1;
+    amountRightAnswer = 0;
+}
+
+function removeRegisterBorder() {
+    let registerBorderRemove = `register_${register}`; // Id von der Register
+
+    document.getElementById(registerBorderRemove).classList.remove('left-border'); //Border am Register wird entfernt
 }
